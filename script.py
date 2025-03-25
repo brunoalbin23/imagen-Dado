@@ -76,7 +76,7 @@ def imagen_a_dados(imagen, tamano_dado=16):
     
     return imagen_salida
 
-# Procesar todas las imágenes en la carpeta img
+# Procesar todas las imágenes en la carpeta img (comentar esto si queremos solo la última imagen)
 for archivo in os.listdir(IMG_FOLDER):
     if archivo.lower().endswith((".png", ".jpg", ".jpeg")):
         ruta_original = os.path.join(IMG_FOLDER, archivo)
@@ -116,3 +116,26 @@ for archivo in os.listdir(IMG_FOLDER):
             img_dados.save(os.path.join(carpeta_salida, "5_dados.png"))
         
         print(f"Procesamiento completado para {archivo}")
+
+# SOLO PARA GENERAR LA ULTIMA IMAGEN SIN PASOS INTERMEDIOS (descomentar esto si queremos solo una imagen)
+"""  for archivo in os.listdir(IMG_FOLDER):
+     if archivo.lower().endswith((".png", ".jpg", ".jpeg")):
+         ruta_original = os.path.join(IMG_FOLDER, archivo)
+         nombre_base, _ = os.path.splitext(archivo)
+        imagen = cv2.imread(ruta_original, cv2.IMREAD_UNCHANGED)
+         
+         if imagen is None:
+             print(f"Error al cargar la imagen {archivo}, saltando procesamiento.")
+             continue
+         
+         img_gris = convertir_a_grises(imagen)
+         img_sin_fondo = sacar_fondo(imagen)
+         img_pixeleada = redimensionar_cuadrado(img_sin_fondo)
+         img_6_tonos = reducir_a_6_tonos(img_pixeleada)
+         img_dados = imagen_a_dados(img_6_tonos)
+         
+         if img_dados is not None:
+             img_dados.save(os.path.join(OUTPUT_FOLDER, f"{nombre_base}_final.png"))
+         
+         print(f"Última imagen generada para {archivo}")"
+"""
